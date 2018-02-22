@@ -7,11 +7,10 @@ import tarfile
 import tensorflow as tf
 import zipfile
 import json
+import argparse
 
 from collections import defaultdict
 from io import StringIO
-from matplotlib import pyplot as plt
-from PIL import Image
 import cv2
 
 if tf.__version__ < '1.4.0':
@@ -22,6 +21,13 @@ sys.path.insert(0, 'utils')
 import label_map_util
 import class_utils
 import visualization_utils as vis_util
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--path', required=True,
+                    help='Path to the video')
+
+opt = parser.parse_args()
+print(opt)
 
 
 # What model to download.
@@ -72,7 +78,7 @@ def load_image_into_numpy_array(image):
 with detection_graph.as_default():
     with tf.Session(graph=detection_graph) as sess:
 
-        cap = cv2.VideoCapture('The.Big.Sick.2017.720p.BluRay.H264.AAC-RARBG.mp4')
+        cap = cv2.VideoCapture(opt.path)
         # cap = cv2.VideoCapture(
             # 'The.Big.Sick.2017.720p.BluRay.H264.AAC-RARBG.mp4')
         framerate = cap.get(cv2.CAP_PROP_FPS)
