@@ -16,24 +16,19 @@ pip install tensorflow
 # For GPU
 pip install tensorflow-gpu
 ```
-
 For Ubuntu 
-
 ``` bash
 sudo apt-get install protobuf-compiler 
 ```
-
 For OSX
-
 ```
 brew install protobuf
 ```
-
+Other Libraries
 ```
 pip install opencv-python
 pip install tornado # For running the server 
 ```
-
 Tensorflow object detection API
 ```
 protoc utils/*.proto --python_out=.
