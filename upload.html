@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Upload CSS Animation UI</title>
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+  <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Roboto:100,300'>
+
+      <link rel="stylesheet" href="static/css/style.css">
+      
+
+<style type="text/css">
+/**
+ * Override feedback icon position
+ * See http://formvalidation.io/examples/adjusting-feedback-icon-position/
+ */
+#eventForm .form-control-feedback {
+    top: 0;
+    right: -15px;
+}
+#sub {
+    display: inline-block;
+    padding: 8px 30px;
+    border-radius: 50px;
+    color: #ffffff;
+    background-color: #2f60c3;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    border: none;
+    -webkit-box-shadow: 2px 5px 20px -5px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 5px 20px -5px rgba(0, 0, 0, 0.1);
+}
+</style>
+
+  
+</head>
+
+<body>
+
+  <div class="upload">
+ <div class="upload-files">
+  <header>
+   <p>
+    <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+    <span class="up">up</span>
+    <span class="load">load</span>
+   </p>
+  </header>
+  <div class="body" id="drop">
+   <i class="fa fa-file-text-o pointer-none" aria-hidden="true"></i>
+   <p class="pointer-none"><b>Drag and drop</b> files here <br /> or <a href="" id="triggerFile">browse</a> to begin the upload</p>
+      </div>
+      <center><form method="POST" enctype="multipart/form-data" action="/upload" onsubmit="return checkForm(this);">
+      
+			<input type="file" name="file1"/>
+<table>
+<tr>
+<td><label>Date:</label></td> 
+<td><input type="text" size="12" required pattern="\d{1,2}/\d{1,2}/\d{4}" placeholder="dd/mm/yyyy" name="startdate"></td>
+</tr>
+<br><br>
+<tr>
+<td><label>Start Time: </label></td>
+<td><input type="text" size="12" required pattern="\d{1,2}:\d{2}([ap]m)?" name="starttime"></td>
+</tr>
+<br><br>
+<tr>
+<td><label>End Time: </label></td>
+<td><input type="text" size="12" required pattern="\d{1,2}:\d{2}([ap]m)?" name="endtime"></td>
+</tr>
+<br><br>
+<tr>
+<td><label>Room Name: </label></td>
+<td><input type="text" size="12" name="room"></td>
+</tr>
+</table>
+<p><input type="submit" id="sub"></p>
+
+</form></center>
+<script type="text/javascript">
+function checkForm(form)
+  {
+    // regular expression to match required date format
+    re = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
+
+    if(form.startdate.value != '') {
+      if(regs = form.startdate.value.match(re)) {
+        // day value between 1 and 31
+        if(regs[1] < 1 || regs[1] > 31) {
+          alert("Invalid value for day: " + regs[1]);
+          form.startdate.focus();
+          return false;
+        }
+        // month value between 1 and 12
+        if(regs[2] < 1 || regs[2] > 12) {
+          alert("Invalid value for month: " + regs[2]);
+          form.startdate.focus();
+          return false;
+        }
+        // year value between 1902 and 2018
+        if(regs[3] < 1902 || regs[3] > (new Date()).getFullYear()) {
+          alert("Invalid value for year: " + regs[3] + " - must be between 1902 and " + (new Date()).getFullYear());
+          form.startdate.focus();
+          return false;
+        }
+      } else {
+        alert("Invalid date format: " + form.startdate.value);
+        form.startdate.focus();
+        return false;
+      }
+    }
+
+    // regular expression to match required time format
+    re = /^(\d{1,2}):(\d{2})([ap]m)?$/;
+
+    if(form.starttime.value != '') {
+      if(regs = form.starttime.value.match(re)) {
+        if(regs[3]) {
+          // 12-hour value between 1 and 12
+          if(regs[1] < 1 || regs[1] > 12) {
+            alert("Invalid value for hours: " + regs[1]);
+            form.starttime.focus();
+            return false;
+          }
+        } else {
+          // 24-hour value between 0 and 23
+          if(regs[1] > 23) {
+            alert("Invalid value for hours: " + regs[1]);
+            form.starttime.focus();
+            return false;
+          }
+        }
+        // minute value between 0 and 59
+        if(regs[2] > 59) {
+          alert("Invalid value for minutes: " + regs[2]);
+          form.starttime.focus();
+          return false;
+        }
+      } else {
+        alert("Invalid time format: " + form.starttime.value);
+        form.starttime.focus();
+        return false;
+      }
+    }
+    if(form.endtime.value != '') {
+      if(regs = form.endtime.value.match(re)) {
+        if(regs[3]) {
+          // 12-hour value between 1 and 12
+          if(regs[1] < 1 || regs[1] > 12) {
+            alert("Invalid value for hours: " + regs[1]);
+            form.endtime.focus();
+            return false;
+          }
+        } else {
+          // 24-hour value between 0 and 23
+          if(regs[1] > 23) {
+            alert("Invalid value for hours: " + regs[1]);
+            form.endtime.focus();
+            return false;
+          }
+        }
+        // minute value between 0 and 59
+        if(regs[2] > 59) {
+          alert("Invalid value for minutes: " + regs[2]);
+          form.endtime.focus();
+          return false;
+        }
+      } else {
+        alert("Invalid time format: " + form.endtime.value);
+        form.endtime.focus();
+        return false;
+      }
+    }
+if(form.room.value == '') 
+{
+    alert("Enter the name of the room");
+    return false;
+}
+
+}
+
+
+</script>
+
+</script>
+  <footer>
+   <div class="divider">
+    <span><AR>FILES</AR></span>
+   </div>
+   <div class="list-files">
+    <!--   template   -->
+   </div>
+<br>
+			<button class="importar">UPDATE FILES</button>
+
+  </footer>
+ </div>
+</div>
+  
+  
+
+    <script  src="static/js/index.js"></script>
+
+
+
+
+</body>
+
+</html>

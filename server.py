@@ -24,7 +24,7 @@ if tf.__version__ < '1.4.0':
 # Custom files
 sys.path.insert(0, 'utils')
 import label_map_util
-import person_class_util as class_utils
+import people_class_util as class_utils
 import visualization_utils as vis_util
 
 
@@ -46,16 +46,17 @@ categories = label_map_util.convert_label_map_to_categories(
     label_map, max_num_classes=NUM_CLASSES, use_display_name=True)
 category_index = label_map_util.create_category_index(categories)
 
+
 def download_model():
-	if not os.path.exists(MODEL_FILE):
-	    opener = urllib.request.URLopener()
-	    opener.retrieve(DOWNLOAD_BASE + MODEL_FILE, MODEL_FILE)
-	    tar_file = tarfile.open(MODEL_FILE)
-	    for file in tar_file.getmembers():
-	        file_name = os.path.basename(file.name)
-	        if 'frozen_inference_graph.pb' in file_name:
-	            tar_file.extract(file, os.getcwd())
-download_model()          
+    if not os.path.exists(MODEL_FILE):
+        opener = urllib.request.URLopener()
+        opener.retrieve(DOWNLOAD_BASE + MODEL_FILE, MODEL_FILE)
+        tar_file = tarfile.open(MODEL_FILE)
+        for file in tar_file.getmembers():
+            file_name = os.path.basename(file.name)
+            if 'frozen_inference_graph.pb' in file_name:
+                tar_file.extract(file, os.getcwd())
+download_model()
 
 detection_graph = tf.Graph()
 with detection_graph.as_default():
@@ -66,8 +67,6 @@ with detection_graph.as_default():
         tf.import_graph_def(od_graph_def, name='')
 
 
-
-
 def load_image_into_numpy_array(image):
     (im_width, im_height) = image.size
     return np.array(image.getdata()).reshape(
@@ -75,88 +74,102 @@ def load_image_into_numpy_array(image):
 
 
 def annotate_video(path_to_video):
-        with detection_graph.as_default():
-            with tf.Session(graph=detection_graph) as sess:
+    with detection_graph.as_default():
+        with tf.Session(graph=detection_graph) as sess:
 
-                cap = cv2.VideoCapture(path_to_video)
-            # cap = cv2.VideoCapture(
-                # 'The.Big.Sick.2017.720p.BluRay.H264.AAC-RARBG.mp4')
-                framerate = cap.get(cv2.CAP_PROP_FPS)
-                framecount = cap.get(cv2.CAP_PROP_FRAME_COUNT)
-                time_ = int(math.floor(framecount // framerate))
-                # print(time_/60)
-                frames_extract = [i * framerate for i in range(0, time_, 30)]
-                # print(len(frames_extract))
+            cap = cv2.VideoCapture(path_to_video)
+        # cap = cv2.VideoCapture(
+            # 'The.Big.Sick.2017.720p.BluRay.H264.AAC-RARBG.mp4')
+            framerate = cap.get(cv2.CAP_PROP_FPS)
+            framecount = cap.get(cv2.CAP_PROP_FRAME_COUNT)
+            time_ = int(math.floor(framecount // framerate))
+            if time_ / 60 > 5:
+                jump = 30
+            elif time_ >= 60:
+                jump = 15
+            else:
+                jump = 5
+            # print(time_/60)
+            frames_extract = [i * framerate for i in range(0, time_, jump)]
+            # print(len(frames_extract))
 
-                image_tensor = detection_graph.get_tensor_by_name('image_tensor:0')
-                detection_boxes = detection_graph.get_tensor_by_name(
-                    'detection_boxes:0')
-                detection_scores = detection_graph.get_tensor_by_name(
-                    'detection_scores:0')
-                detection_classes = detection_graph.get_tensor_by_name(
-                    'detection_classes:0')
-                num_detections = detection_graph.get_tensor_by_name('num_detections:0')
+            image_tensor = detection_graph.get_tensor_by_name('image_tensor:0')
+            detection_boxes = detection_graph.get_tensor_by_name(
+                'detection_boxes:0')
+            detection_scores = detection_graph.get_tensor_by_name(
+                'detection_scores:0')
+            detection_classes = detection_graph.get_tensor_by_name(
+                'detection_classes:0')
+            num_detections = detection_graph.get_tensor_by_name(
+                'num_detections:0')
 
-                annotations = {}
-                annotations['video_id'] = 240
-                annotations['frames'] = []
-                annotations['videoShape'] = {}
-                annotations['videoShape']['height'] = cap.get(
-                    cv2.CAP_PROP_FRAME_HEIGHT)
-                annotations['videoShape']['width'] = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
+            annotations = {}
+            annotations['frames'] = []
+            annotations['videoShape'] = {}
+            annotations['videoShape']['height'] = cap.get(
+                cv2.CAP_PROP_FRAME_HEIGHT)
+            annotations['videoShape']['width'] = cap.get(
+                cv2.CAP_PROP_FRAME_WIDTH)
 
-                for frame_number in frames_extract:
-                    cap.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
-                    ret, frame = cap.read()
-                    if ret:
-                        image_np_expanded = np.expand_dims(frame, axis=0)
-                        annotations_frame = {}
-                        annotations_frame['time'] = int(math.floor(framecount // framerate))
-                        (boxes, scores, classes, num) = sess.run(
-                            [detection_boxes, detection_scores,
-                             detection_classes, num_detections],
-                            feed_dict={image_tensor: image_np_expanded})
+            for frame_number in frames_extract:
+                cap.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
+                ret, frame = cap.read()
+                if ret:
+                    image_np_expanded = np.expand_dims(frame, axis=0)
+                    annotations_frame = {}
+                    annotations_frame['time'] = int(
+                        math.floor(framecount // framerate))
+                    (boxes, scores, classes, num) = sess.run(
+                        [detection_boxes, detection_scores,
+                         detection_classes, num_detections],
+                        feed_dict={image_tensor: image_np_expanded})
 
-                        annotations_frame['annotations'], count = (
-                            class_utils.get_class(np.squeeze(classes).astype(np.int32),
-                                                  category_index, np.squeeze(boxes),
-                                                  np.squeeze(scores)))
-                        annotations_frame['count'] = count
-                        annotations['frames'].append(annotations_frame)
+                    annotations_frame['annotations'], count = (
+                        class_utils.get_class(np.squeeze(classes).astype(np.int32),
+                                              category_index, np.squeeze(
+                                                  boxes),
+                                              np.squeeze(scores)))
+                    annotations_frame['count'] = count
+                    annotations['frames'].append(annotations_frame)
 
-                        # cv2.imshow('frame', frame)
-                        print(frame_number)
-                        if cv2.waitKey(1) & 0xFF == ord('q'):
-                            break
-                    else:
+                    # cv2.imshow('frame', frame)
+                    print(frame_number)
+                    if cv2.waitKey(1) & 0xFF == ord('q'):
                         break
-                #print(json.dumps(annotations))
-                # TODO - Proper naming for the json file to save
-                with open('time.json', 'w') as file:
-                    json.dump(annotations, file)
-                cap.release()
-                # # out.release()
-                cv2.destroyAllWindows()
+                else:
+                    break
+            # print(json.dumps(annotations))
+            # TODO - Proper naming for the json file to save
+            with open('time.json', 'w') as file:
+                json.dump(annotations, file)
+            cap.release()
+            # # out.release()
+            cv2.destroyAllWindows()
 
-        return annotations
+    return annotations
+
 
 class UploadHandler(tornado.web.RequestHandler):
+
+    def get(self):
+        self.render('upload.html', title='this')
+
     def post(self):
         file1 = self.request.files['file1'][0]
         original_fname = file1['filename']
-        extension = os.path.splitext(original_fname)[1]        
+        extension = os.path.splitext(original_fname)[1]
         output_file = open("uploads/"
                            + original_fname, 'wb')
         output_file.write(file1['body'])
         results = annotate_video("uploads/"
-                        + original_fname)
-        
+                                 + original_fname)
+
         self.write({'Response': True,
                     'results': json.dumps(results)})
 
 
 app = tornado.web.Application([
-		(r'/upload', UploadHandler)
-	])
+    (r'/upload', UploadHandler)
+], static_path='./static')
 app.listen(6969)
 tornado.ioloop.IOLoop.instance().start()

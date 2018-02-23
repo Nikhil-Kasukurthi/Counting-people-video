@@ -19,7 +19,7 @@ if tf.__version__ < '1.4.0':
 
 sys.path.insert(0, 'utils')
 import label_map_util
-import class_utils
+import people_class_util as class_utils
 import visualization_utils as vis_util
 
 parser = argparse.ArgumentParser()
@@ -80,12 +80,19 @@ with detection_graph.as_default():
 
         cap = cv2.VideoCapture(opt.path)
         # cap = cv2.VideoCapture(
-            # 'The.Big.Sick.2017.720p.BluRay.H264.AAC-RARBG.mp4')
+        # 'The.Big.Sick.2017.720p.BluRay.H264.AAC-RARBG.mp4')
         framerate = cap.get(cv2.CAP_PROP_FPS)
         framecount = cap.get(cv2.CAP_PROP_FRAME_COUNT)
         time_ = int(math.floor(framecount // framerate))
+        if time_ / 60 > 5:
+            jump = 30
+        elif time >= 60:
+            jump = 15
+        else:
+            jump = 5
         # print(time_/60)
-        frames_extract = [i * framerate for i in range(0, time_, 30)]
+        frames_extract = [i * framerate for i in range(0, time_, jump)]
+
         # print(len(frames_extract))
 
         image_tensor = detection_graph.get_tensor_by_name('image_tensor:0')
@@ -111,7 +118,8 @@ with detection_graph.as_default():
             if ret:
                 image_np_expanded = np.expand_dims(frame, axis=0)
                 annotations_frame = {}
-                annotations_frame['time'] = int(math.floor(framecount // framerate))
+                annotations_frame['time'] = int(
+                    math.floor(framecount // framerate))
                 (boxes, scores, classes, num) = sess.run(
                     [detection_boxes, detection_scores,
                      detection_classes, num_detections],
