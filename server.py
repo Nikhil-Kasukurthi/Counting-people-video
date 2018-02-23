@@ -165,7 +165,7 @@ class UploadHandler(tornado.web.RequestHandler):
                                  + original_fname)
 
         self.write({'Response': True,
-                    'results': json.dumps(results)})
+                    'results': results})
 
 
 app = tornado.web.Application([
