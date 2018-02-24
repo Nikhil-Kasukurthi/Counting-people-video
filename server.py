@@ -118,7 +118,7 @@ def annotate_video(path_to_video):
                     image_np_expanded = np.expand_dims(frame, axis=0)
                     annotations_frame = {}
                     annotations_frame['time'] = int(
-                        math.floor(framecount // framerate))
+                        math.floor(frame_number*framerate))
                     (boxes, scores, classes, num) = sess.run(
                         [detection_boxes, detection_scores,
                          detection_classes, num_detections],
@@ -171,5 +171,5 @@ class UploadHandler(tornado.web.RequestHandler):
 app = tornado.web.Application([
     (r'/upload', UploadHandler)
 ], static_path='./static')
-app.listen(6969)
+app.listen(8001)
 tornado.ioloop.IOLoop.instance().start()
