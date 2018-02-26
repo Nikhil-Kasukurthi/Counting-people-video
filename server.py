@@ -16,6 +16,7 @@ import tensorflow as tf
 import zipfile
 import json
 import cv2
+from markupsafe import Markup
 
 if tf.__version__ < '1.4.0':
     raise ImportError(
@@ -163,13 +164,14 @@ class UploadHandler(tornado.web.RequestHandler):
         output_file.write(file1['body'])
         results = annotate_video("uploads/"
                                  + original_fname)
-
-        self.write({'Response': True,
-                    'results': results})
+        
+        self.render('vis_line.html', response = json.dumps(results))
+        # self.write({'Response': True,
+        #             'results': results})
 
 
 app = tornado.web.Application([
     (r'/upload', UploadHandler)
-], static_path='./static')
+], static_path='./static', debug=True)
 app.listen(8001)
 tornado.ioloop.IOLoop.instance().start()
