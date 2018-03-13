@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/responsive.css">
+    <link href="https://getbootstrap.com/examples/justified-nav/justified-nav.css" rel="stylesheet">
+    <link rel="stylesheet" href="stylegraph.css">
 <style>
 
 svg {
@@ -8,28 +13,29 @@ svg {
 
 path.line {
   fill: none;
-  stroke: #666;
+  stroke: #126ac2;
   stroke-width: 1.5px;
 }
 
 path.area {
-  fill: #e7e7e7;
+  fill: #fff;
 }
 
 .axis {
   shape-rendering: crispEdges;
+
 }
 
 .x.axis line {
-  stroke: #fff;
+  stroke: #000;
+
 }
 
-.x.axis .minor {
-  stroke-opacity: .5;
-}
 
 .x.axis path {
-  display: none;
+  fill: none;
+  stroke: #000;
+
 }
 
 .y.axis line,
@@ -37,41 +43,81 @@ path.area {
   fill: none;
   stroke: #000;
 }
+.card {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    height: 75vh;
+    width: 100%;
+    background-color: white;
+}
 
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+/* Add some padding inside the card container */
+.container {
+    padding: 40px 16px;
+}
 </style>
-<body>
+<body style="background-color:#75cbe7; color: #515656; ">
+<div class="container">
+
+<div class="card" id="here">
+
+<h4 style="padding: 30px 15px;"><center> Data Visualisation of the total footfalls in individual room </center></h4>
+
+
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script>
 
 
-var resultsJSON = {% raw response %};
-console.log(resultsJSON)
-data = resultsJSON
+//var resultsJSON = {% raw response %};
+//console.log(resultsJSON)
+//data = resultsJSON
 // load the data
+    d3.json("annotation_bigsick.json",function(error, data){
 data.frames.forEach(function(d) {
-    d.count = d.count;
+    d.count = +d.count;
     d.time = d.time;
 });
 
 var margin = {top: 40, right: 40, bottom: 40, left: 40},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    width = 1100 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
 
-var x = d3.scale.ordinal()
-    .rangeRoundBands([0, width], .05);
+min_time = d3.max(data.frames, function(d) { return d.time; })
+max_time = d3.min(data.frames, function(d) { return d.time; })
+
+var x = d3.scale.linear()
+                  .domain([max_time, min_time])
+                  .range([0, width]);
 
 var y = d3.scale.linear()
     .range([height, 0]);
 
 var xAxis = d3.svg.axis()
     .scale(x)
-    .orient("bottom")
-    .tickSize(-height);
+    .orient("bottom");
+    //.tickSize(-height);
+
 
 var yAxis = d3.svg.axis()
     .scale(y)
-    .ticks(4)
-    .orient("left");
+    //.ticks(4)
+    .orient("left")
+    .ticks(10,"");
+
+    var svg = d3.select("#here").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+
 
 var area = d3.svg.area()
     .interpolate("monotone")
@@ -84,11 +130,7 @@ var line = d3.svg.line()
     .x(function(d) { return x(d.time); })
     .y(function(d) { return y(d.count); });
 
-var svg = d3.select("body").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
 
 svg.append("clipPath")
     .attr("id", "clip")
@@ -97,20 +139,17 @@ svg.append("clipPath")
     .attr("height", height);
 
 
-
   // Compute the minimum and maximum time, and the maximum count.
-  x.domain(data.frames.map(function(d) { return d.time; }));
   y.domain([0, d3.max(data.frames, function(d) { return d.count; })]);
 
-  svg
-      .datum(data.frames);
+  svg.datum(data.frames);
 
   svg.append("path")
       .attr("class", "area")
       .attr("clip-path", "url(#clip)")
       .attr("d", area);
 
-  svg.append("g")
+  /*svg.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
       .call(xAxis);
@@ -118,7 +157,28 @@ svg.append("clipPath")
   svg.append("g")
       .attr("class", "y axis")
       .attr("transform", "translate(" + width + ",0)")
-      .call(yAxis);
+      .call(yAxis);*/
+      svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis)
+      .attr("x", 6)
+    .selectAll("text")
+      .style("text-anchor", "end")
+       .attr("dx", ".71em");
+
+       //.attr("dy", "-.01em")
+      //.attr("transform", "rotate(-90)" );
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 5)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Count");
 
   svg.append("path")
       .attr("class", "line")
@@ -136,6 +196,6 @@ svg.append("clipPath")
 
 // Parse dates and numbers. We assume values are sorted by time.
 // Also filter to one symbol; the S&P 500.
-
+});
 
 </script>
