@@ -7,8 +7,8 @@ body {
 
 body {
   font-family: 'Roboto', sans-serif;
-  background: -webkit-gradient(linear, left bottom, left top, from(#4F6072), to(#8699AA));
-  background: linear-gradient(to top, #4F6072, #8699AA);
+  background: -webkit-gradient(linear, left bottom, left top, from(#75cbe7), to(#8699AA));
+  background: linear-gradient(to top, #75cbe7, #8699AA);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
