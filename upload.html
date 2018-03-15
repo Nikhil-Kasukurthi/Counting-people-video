@@ -52,11 +52,12 @@
    </p>
   </header>
   <div class="body" id="drop">
+	  <center><form method="POST" enctype="multipart/form-data" action="/upload" onsubmit="return checkForm(this);">
    <i class="fa fa-file-text-o pointer-none" aria-hidden="true"></i>
    <p class="pointer-none"><b>Drag and drop</b> files here <br /> or <a href="" id="triggerFile">browse</a> to begin the upload</p>
 			<input type="file" multiple="multiple" name="file1"/>
       </div>
-      <center><form method="POST" enctype="multipart/form-data" action="/upload" onsubmit="return checkForm(this);">
+      
 
 <table>
 <tr>
