@@ -1,0 +1,6 @@
+Shambhavi96.github.io {
+    root ./
+    proxy / localhost:8001 {
+        transparent
+    }
+}

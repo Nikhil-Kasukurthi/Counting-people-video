@@ -1,0 +1,106 @@
+/root/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+WARNING:tornado.access:404 GET /favicon.ico (115.249.106.165) 0.88ms
+WARNING:tornado.access:404 GET /apple-touch-icon-precomposed.png (115.249.106.165) 0.67ms
+WARNING:tornado.access:404 GET /apple-touch-icon.png (115.249.106.165) 0.69ms
+WARNING:tornado.access:404 GET /favicon.ico (115.249.106.165) 0.92ms
+/root/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+WARNING:tornado.access:404 GET /favicon.ico (115.249.106.165) 0.90ms
+2018-02-24 03:58:14.330750: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+WARNING:tornado.access:404 GET /favicon.ico (122.15.77.139) 0.88ms
+2018-02-24 10:46:32.978450: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+/root/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+WARNING:tornado.access:404 GET / (122.167.84.27) 0.59ms
+WARNING:tornado.access:404 GET /favicon.ico (122.167.84.27) 0.85ms
+WARNING:tornado.access:404 GET / (122.167.84.27) 0.63ms
+/root/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+Traceback (most recent call last):
+  File "server.py", line 174, in <module>
+    app.listen(8001)
+  File "/root/anaconda3/lib/python3.6/site-packages/tornado/web.py", line 1944, in listen
+    server.listen(port, address)
+  File "/root/anaconda3/lib/python3.6/site-packages/tornado/tcpserver.py", line 142, in listen
+    sockets = bind_sockets(port, address=address)
+  File "/root/anaconda3/lib/python3.6/site-packages/tornado/netutil.py", line 197, in bind_sockets
+    sock.bind(sockaddr)
+OSError: [Errno 98] Address already in use
+/root/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+WARNING:tornado.access:404 GET /favicon.ico (115.249.106.165) 1.03ms
+2018-02-26 19:39:14.238670: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+/root/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+WARNING:tornado.access:404 GET /favicon.ico (42.111.137.235) 6.84ms
+WARNING:tornado.access:404 GET / (66.240.219.146) 2.07ms
+WARNING:tornado.access:404 GET /favicon.ico (66.240.219.146) 2.11ms
+/root/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+WARNING:tornado.access:404 GET / (107.170.227.166) 3.72ms
+WARNING:tornado.access:404 GET / (139.162.79.87) 0.93ms
+WARNING:tornado.access:404 GET /favicon.ico (122.15.77.139) 6.37ms
+WARNING:tornado.access:404 GET /favicon.ico (183.83.95.202) 2.91ms
+WARNING:tornado.access:404 GET / (80.82.77.139) 1.50ms
+WARNING:tornado.access:404 GET /favicon.ico (80.82.77.139) 1.95ms
+WARNING:tornado.access:404 GET /favicon.ico (183.83.86.199) 3.04ms
+WARNING:tornado.access:404 GET / (107.170.255.235) 0.84ms
+WARNING:tornado.access:404 GET /favicon.ico (183.83.95.202) 8.56ms
+WARNING:tornado.access:404 GET /favicon.ico (122.15.77.139) 2.77ms
+WARNING:tornado.access:404 GET / (139.162.79.87) 2.47ms
+WARNING:tornado.access:404 GET /favicon.ico (122.15.77.139) 3.15ms
+2018-03-13 10:39:28.336296: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+/root/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+Traceback (most recent call last):
+  File "server.py", line 176, in <module>
+    app.listen(8001)
+  File "/root/anaconda3/lib/python3.6/site-packages/tornado/web.py", line 1944, in listen
+    server.listen(port, address)
+  File "/root/anaconda3/lib/python3.6/site-packages/tornado/tcpserver.py", line 142, in listen
+    sockets = bind_sockets(port, address=address)
+  File "/root/anaconda3/lib/python3.6/site-packages/tornado/netutil.py", line 197, in bind_sockets
+    sock.bind(sockaddr)
+OSError: [Errno 98] Address already in use
+/root/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+WARNING:tornado.access:404 GET /dataset (106.203.39.135) 1.83ms
+/root/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+ERROR:tornado.application:Uncaught exception POST /upload?style_id=43-51 (106.203.39.135)
+HTTPServerRequest(protocol='http', host='139.59.87.132:8001', method='POST', uri='/upload?style_id=43-51', version='HTTP/1.1', remote_ip='106.203.39.135', headers={'Host': '139.59.87.132:8001', 'Connection': 'keep-alive', 'Content-Length': '73198', 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36', 'Cache-Control': 'no-cache', 'Origin': 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', 'Postman-Token': '97a519a4-1943-70ec-8bff-28683a30a34c', 'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundaryitBuDKzeJpJ71jxH', 'Accept': '*/*', 'Dnt': '1', 'Accept-Encoding': 'gzip, deflate', 'Accept-Language': 'en-US,en;q=0.9'})
+Traceback (most recent call last):
+  File "/root/anaconda3/lib/python3.6/site-packages/tornado/web.py", line 1510, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "server.py", line 159, in post
+    file1 = self.request.files['file1'][0]
+KeyError: 'file1'
+ERROR:tornado.access:500 POST /upload?style_id=43-51 (106.203.39.135) 497.50ms
+ERROR:tornado.application:Uncaught exception POST /upload?style_id=43-51 (106.203.39.135)
+HTTPServerRequest(protocol='http', host='139.59.87.132:8001', method='POST', uri='/upload?style_id=43-51', version='HTTP/1.1', remote_ip='106.203.39.135', headers={'Host': '139.59.87.132:8001', 'Connection': 'keep-alive', 'Content-Length': '73198', 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36', 'Cache-Control': 'no-cache', 'Origin': 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', 'Postman-Token': '441bbee5-5ece-b0f2-08b2-0b9a3431cbdb', 'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundaryxgjwDw2q7yP8LCEB', 'Accept': '*/*', 'Dnt': '1', 'Accept-Encoding': 'gzip, deflate', 'Accept-Language': 'en-US,en;q=0.9'})
+Traceback (most recent call last):
+  File "/root/anaconda3/lib/python3.6/site-packages/tornado/web.py", line 1510, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "server.py", line 159, in post
+    file1 = self.request.files['file1'][0]
+KeyError: 'file1'
+ERROR:tornado.access:500 POST /upload?style_id=43-51 (106.203.39.135) 495.49ms
+2018-03-14 21:24:56.940897: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+/root/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+WARNING:tornado.access:404 GET /favicon.ico (122.15.77.139) 6.60ms
+2018-03-15 09:32:04.282744: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+WARNING:tornado.access:404 GET /css/responsive.css (122.15.77.139) 2.58ms
+WARNING:tornado.access:404 GET /stylegraph.css (122.15.77.139) 1.07ms
+WARNING:tornado.access:404 GET /annotation_bigsick.json (122.15.77.139) 0.97ms
+/root/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+WARNING:tornado.access:404 GET /favicon.ico (115.249.106.164) 2.20ms
+2018-03-15 09:41:58.604999: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+WARNING:tornado.access:404 GET /css/responsive.css (115.249.106.164) 2.41ms
+WARNING:tornado.access:404 GET /stylegraph.css (115.249.106.164) 0.79ms
+WARNING:tornado.access:404 GET /annotation_bigsick.json (115.249.106.164) 0.95ms
+WARNING:tornado.access:404 GET /css/responsive.css (122.15.77.139) 2.32ms
+WARNING:tornado.access:404 GET /stylegraph.css (122.15.77.139) 1.05ms
+WARNING:tornado.access:404 GET /annotation_bigsick.json (122.15.77.139) 0.73ms
