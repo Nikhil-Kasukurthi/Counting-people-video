@@ -74,13 +74,13 @@ path.area {
 <script>
 
 var resultsJSON = {% raw response %};
-+console.log(resultsJSON)
-+data = resultsJSON
-+// load the data
-+data.frames.forEach(function(d) {
-+    d.count = d.count;
-+    d.time = d.time;
-+});
+console.log(resultsJSON)
+data = resultsJSON
+// load the data
+data.frames.forEach(function(d) {
+    d.count = d.count;
+    d.time = d.time;
+});
     
 var margin = {top: 40, right: 40, bottom: 40, left: 40},
     width = 1100 - margin.left - margin.right,
