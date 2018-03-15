@@ -73,17 +73,15 @@ path.area {
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script>
 
-
-//var resultsJSON = {% raw response %};
-//console.log(resultsJSON)
-//data = resultsJSON
-// load the data
-    d3.json("annotation_bigsick.json",function(error, data){
-data.frames.forEach(function(d) {
-    d.count = +d.count;
-    d.time = d.time;
-});
-
+var resultsJSON = {% raw response %};
++console.log(resultsJSON)
++data = resultsJSON
++// load the data
++data.frames.forEach(function(d) {
++    d.count = d.count;
++    d.time = d.time;
++});
+    
 var margin = {top: 40, right: 40, bottom: 40, left: 40},
     width = 1100 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
