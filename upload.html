@@ -56,7 +56,7 @@
    <p class="pointer-none"><b>Drag and drop</b> files here <br /> or <a href="" id="triggerFile">browse</a> to begin the upload</p>
 			<input type="file" multiple="multiple" name="file1"/>
       </div>
-      <center><form method="POST" action="..." onsubmit="return checkForm(this);">
+      <center>form method="POST" enctype="multipart/form-data" action="/upload" onsubmit="return checkForm(this);">
 
 <table>
 <tr>
