@@ -11,6 +11,7 @@
 <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Roboto:100,300'>
 
       <link rel="stylesheet" href="static/css/style.css">
+
       
 
 <style type="text/css">
@@ -53,10 +54,10 @@
   <div class="body" id="drop">
    <i class="fa fa-file-text-o pointer-none" aria-hidden="true"></i>
    <p class="pointer-none"><b>Drag and drop</b> files here <br /> or <a href="" id="triggerFile">browse</a> to begin the upload</p>
+			<input type="file" multiple="multiple" name="file1"/>
       </div>
-      <center><form method="POST" enctype="multipart/form-data" action="/upload" onsubmit="return checkForm(this);">
-      
-			<input type="file" name="file1"/>
+      <center><form method="POST" action="..." onsubmit="return checkForm(this);">
+
 <table>
 <tr>
 <td><label>Date:</label></td> 
@@ -181,7 +182,9 @@ if(form.room.value == '')
     return false;
 }
 
-}
+    alert("All input fields have been validated!");
+    return true;
+  }
 
 
 </script>
@@ -196,14 +199,13 @@ if(form.room.value == '')
    </div>
 <br>
 			<button class="importar">UPDATE FILES</button>
-
   </footer>
  </div>
 </div>
   
   
 
-    <script  src="static/js/index.js"></script>
+    <script  src="js/index.js"></script>
 
 
 
