@@ -118,7 +118,7 @@ def annotate_video(path_to_video):
                     image_np_expanded = np.expand_dims(frame, axis=0)
                     annotations_frame = {}
                     annotations_frame['time'] = int(
-                        frame_number // framerate * 100)
+                        math.floor(frame_number // framerate))
                     (boxes, scores, classes, num) = sess.run(
                         [detection_boxes, detection_scores,
                          detection_classes, num_detections],
