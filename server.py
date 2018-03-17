@@ -155,6 +155,7 @@ class UploadHandler(tornado.web.RequestHandler):
         self.render('upload.html', title='Video Visualisation')
 
     def post(self):
+        self.request.connection.set_max_body_size(100000000000000000000)
         date = self.get_argument('date')
         start_time = self.get_argument('start_time')
         end_time = self.get_argument('end_time')
@@ -162,10 +163,10 @@ class UploadHandler(tornado.web.RequestHandler):
         file1 = self.request.files['file'][0]
         original_fname = file1['filename']
         extension = os.path.splitext(original_fname)[1]
-        file_name = "static/upload/" + original_fname
-        output_file = open(file_name, 'wb')
+        file_path = "static/upload/" + original_fname
+        output_file = open(file_path, 'wb')
         output_file.write(file1['body'])
-        results = annotate_video(file_name)
+        results = annotate_video(file_path)
 
         self.render('vis_line.html',
                     response=json.dumps(results),
@@ -173,7 +174,8 @@ class UploadHandler(tornado.web.RequestHandler):
                     end_time=end_time,
                     date=date,
                     room_name=room_name,
-                    file_name=original_fname)
+                    file_name=original_fname,
+                    file_path=file_path)
         # self.write({'Response': True,
         #             'results': results})
 
@@ -186,6 +188,6 @@ class VisuliseFileHandler(tornado.web.RequestHandler):
 app = tornado.web.Application([
     (r'/upload', UploadHandler),
     (r'/visualise-file', VisuliseFileHandler)
-], static_path='./static', debug=True)
+], static_path='./static', max_buffer_size=10485760000,debug=True)
 app.listen(8001)
 tornado.ioloop.IOLoop.instance().start()

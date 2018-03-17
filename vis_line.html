@@ -2,7 +2,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="static/css/responsive.css">
     <link href="https://getbootstrap.com/examples/justified-nav/justified-nav.css" rel="stylesheet">
     <link rel="stylesheet" href="static/css/stylegraph.css">
 <style>
@@ -69,8 +68,8 @@ path.area {
 
 <div class="card" id="here">
 
-<h2 style="padding: 30px 15px;"><center>Footfall in <b><i>{{room_name}}</i></b>  on {{date}}</center></h4>
-<h3 style="padding: 30px 15px;"><center>{{file_name}}</center></h3>
+<h3 style="padding: 30px 15px;"><center>Footfall in <b><i>{{room_name}}</i></b>  on {{date}}</center></h4>
+<h4 style="padding: 30px 15px;"><center>{{file_name}}</center></h3>
 
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script>
@@ -187,5 +186,63 @@ svg.append("clipPath")
   //     .text(data[0].symbol);
   // On click, update the x-axis.
 
+</script>
+<style type="text/css">
+  #custom-seekbar
+{  
+  cursor: pointer;
+  height: 10px;
+  margin-left: 40px;
+  margin-bottom: 10px;
+  margin-right: 40px;
+  outline: thin solid orange;
+  overflow: hidden;
+  position: relative;
+}
+#custom-seekbar span
+{
+  background-color: orange;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 10px;
+  width: 0px;
+}
+
+#video{
+  margin-left: 40px
+}
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<div id="custom-seekbar" align="center">
+  <span></span>
+</div>
+
+<video id="video" width="400" controls autoplay>
+    <source src = {{ file_path }} type="video/mp4">
+</video>
+
+<script type="text/javascript">
+var margin = {top: 40, right: 40, bottom: 40, left: 40},
+    width = 1100 - margin.left - margin.right,
+    height = 300 - margin.top - margin.bottom;
+
+document.getElementById("custom-seekbar").width = width;
+
+var vid = document.getElementById("video");
+vid.ontimeupdate = function(){
+  var percentage = ( vid.currentTime / vid.duration ) * 100;
+  $("#custom-seekbar span").css("width", percentage+"%");
+};
+
+$("#custom-seekbar").on("click", function(e){
+    var offset = $(this).offset();
+    var left = (e.pageX - offset.left);
+    var totalWidth = width;
+    var percentage = ( left / totalWidth );
+    var vidTime = vid.duration * percentage;
+    vid.currentTime = vidTime;
+});
 </script>
 </div>
