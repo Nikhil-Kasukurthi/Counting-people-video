@@ -2,9 +2,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="static/css/responsive.css">
+<link rel="stylesheet" href="css/responsive.css">
     <link href="https://getbootstrap.com/examples/justified-nav/justified-nav.css" rel="stylesheet">
-    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="stylegraph.css">
 <style>
 
 svg {
@@ -60,7 +60,9 @@ path.area {
 /* Add some padding inside the card container */
 .container {
     padding: 40px 16px;
+    width:1500px;
 }
+
 </style>
 <body style="background-color:#75cbe7; color: #515656; ">
 <div class="container">
@@ -73,7 +75,8 @@ path.area {
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script>
 
-d3.json("static/annotations/bigsick.json",function(error, data){
+
+    d3.json("static/annotations/bigsick.json",function(error, data){
 data.frames.forEach(function(d) {
     d.count = +d.count;
     d.time = d.time;
@@ -81,7 +84,7 @@ data.frames.forEach(function(d) {
 
 var margin = {top: 40, right: 40, bottom: 40, left: 40},
     width = 1100 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+    height = 300 - margin.top - margin.bottom;
 
 min_time = d3.max(data.frames, function(d) { return d.time; })
 max_time = d3.min(data.frames, function(d) { return d.time; })

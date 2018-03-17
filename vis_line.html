@@ -60,15 +60,17 @@ path.area {
 /* Add some padding inside the card container */
 .container {
     padding: 40px 16px;
+    width:1500px;
 }
+
 </style>
 <body style="background-color:#75cbe7; color: #515656; ">
 <div class="container">
 
 <div class="card" id="here">
 
-<h4 style="padding: 30px 15px;"><center> Data Visualisation of the total footfalls in individual room </center></h4>
-
+<h2 style="padding: 30px 15px;"><center>Footfall in <b><i>{{room_name}}</i></b>  on {{date}}</center></h4>
+<h3 style="padding: 30px 15px;"><center>{{file_name}}</center></h3>
 
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script>
@@ -76,15 +78,10 @@ path.area {
 var resultsJSON = {% raw response %};
 console.log(resultsJSON)
 data = resultsJSON
-// load the data
-data.frames.forEach(function(d) {
-    d.count = d.count;
-    d.time = d.time;
-});
-    
+
 var margin = {top: 40, right: 40, bottom: 40, left: 40},
     width = 1100 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+    height = 300 - margin.top - margin.bottom;
 
 min_time = d3.max(data.frames, function(d) { return d.time; })
 max_time = d3.min(data.frames, function(d) { return d.time; })
@@ -183,4 +180,12 @@ svg.append("clipPath")
       .attr("clip-path", "url(#clip)")
       .attr("d", line);
 
+  // svg.append("text")
+  //     .attr("x", width - 6)
+  //     .attr("y", height - 6)
+  //     .style("text-anchor", "end")
+  //     .text(data[0].symbol);
+  // On click, update the x-axis.
+
 </script>
+</div>

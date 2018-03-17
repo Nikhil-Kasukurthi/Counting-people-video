@@ -155,16 +155,25 @@ class UploadHandler(tornado.web.RequestHandler):
         self.render('upload.html', title='Video Visualisation')
 
     def post(self):
+        date = self.get_argument('date')
+        start_time = self.get_argument('start_time')
+        end_time = self.get_argument('end_time')
+        room_name = self.get_argument('room_name')
         file1 = self.request.files['file'][0]
         original_fname = file1['filename']
         extension = os.path.splitext(original_fname)[1]
-        output_file = open("uploads/"
-                           + original_fname, 'wb')
+        file_name = "static/upload/" + original_fname
+        output_file = open(file_name, 'wb')
         output_file.write(file1['body'])
-        results = annotate_video("uploads/"
-                                 + original_fname)
+        results = annotate_video(file_name)
 
-        self.render('vis_line.html', response=json.dumps(results))
+        self.render('vis_line.html',
+                    response=json.dumps(results),
+                    start_time=start_time,
+                    end_time=end_time,
+                    date=date,
+                    room_name=room_name,
+                    file_name=original_fname)
         # self.write({'Response': True,
         #             'results': results})
 
