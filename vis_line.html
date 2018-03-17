@@ -4,7 +4,7 @@
 <link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="static/css/responsive.css">
     <link href="https://getbootstrap.com/examples/justified-nav/justified-nav.css" rel="stylesheet">
-    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="static/css/stylegraph.css">
 <style>
 
 svg {
@@ -73,17 +73,15 @@ path.area {
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script>
 
-
-//var resultsJSON = {% raw response %};
-//console.log(resultsJSON)
-//data = resultsJSON
+var resultsJSON = {% raw response %};
+console.log(resultsJSON)
+data = resultsJSON
 // load the data
-    d3.json("annotation_bigsick.json",function(error, data){
 data.frames.forEach(function(d) {
-    d.count = +d.count;
+    d.count = d.count;
     d.time = d.time;
 });
-
+    
 var margin = {top: 40, right: 40, bottom: 40, left: 40},
     width = 1100 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
@@ -184,18 +182,5 @@ svg.append("clipPath")
       .attr("class", "line")
       .attr("clip-path", "url(#clip)")
       .attr("d", line);
-
-  // svg.append("text")
-  //     .attr("x", width - 6)
-  //     .attr("y", height - 6)
-  //     .style("text-anchor", "end")
-  //     .text(data[0].symbol);
-  // On click, update the x-axis.
-
-
-
-// Parse dates and numbers. We assume values are sorted by time.
-// Also filter to one symbol; the S&P 500.
-});
 
 </script>

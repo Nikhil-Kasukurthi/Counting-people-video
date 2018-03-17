@@ -3,18 +3,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="static/css/responsive.css">
-    
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-
-    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
-
-<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Roboto:100,300'>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Roboto:100,300'>
-
-    <link rel="stylesheet" href="satic/css/style.css">
+<link rel="stylesheet" href="static/css/style.css">
 <style>
 
 svg {
@@ -184,12 +176,14 @@ path.area {
     <span class="load">load</span>
    </p>
   </header>
+  
+   <form method="POST" action="/upload" enctype="multipart/form-data" onsubmit="return checkForm(this);">
   <div class="body" id="drop">
    <i class="fa fa-file-text-o pointer-none" aria-hidden="true"></i>
    <p class="pointer-none"><b>Drag and drop</b> files here <br /> or <a href="" id="triggerFile">browse</a> to begin the upload</p>
-      <input type="file" multiple="multiple" />
+      <input type="file" multiple="multiple" name="file">
       </div>
-      <center><form method="POST" action="..." onsubmit="return checkForm(this);">
+      <center>
 
 <table>
 <tr>
@@ -216,6 +210,7 @@ path.area {
 <p><input type="submit" id="sub"></p>
 
 </form></center>
+
 <script type="text/javascript">
 function checkForm(form)
   {
@@ -316,11 +311,6 @@ if(form.room.value == '')
     return false;
 }
 
-    alert("All input fields have been validated!");
-    return true;
-  }
-
-
 </script>
 
 
@@ -340,8 +330,7 @@ if(form.room.value == '')
  </div> 
   </div>
 
-    <script  src="static/js/index.js"></script>
-
+    
 <div class="column" id="slide-up">
 
 <div class="container">
@@ -352,11 +341,12 @@ if(form.room.value == '')
 
 <!--a href="vis_line 2.html" class="btn btn-primary">Visualise</a-->
 <div class="w3-display-middle">
-<button class="button" style="vertical-align:middle;"><a href="vis_line.html"><span>Visualise </span></a></button>
+<button class="button" style="vertical-align:middle;"><a href="/visualise-file"><span>Visualise </span></a></button>
 
 </div>
 </div>
 </div>
 </div>
 </body>
+<script  src="static/js/index.js"></script>
 </html>

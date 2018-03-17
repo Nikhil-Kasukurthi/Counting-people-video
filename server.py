@@ -28,7 +28,6 @@ import label_map_util
 import people_class_util as class_utils
 import visualization_utils as vis_util
 
-
 MODEL_NAME = 'ssd_mobilenet_v1_coco_2017_11_17'
 # MODEL_NAME = 'faster_rcnn_nas_lowproposals_coco_2017_11_08'
 MODEL_FILE = MODEL_NAME + '.tar.gz'
@@ -153,10 +152,10 @@ def annotate_video(path_to_video):
 class UploadHandler(tornado.web.RequestHandler):
 
     def get(self):
-        self.render('upload.html', title='this')
+        self.render('upload.html', title='Video Visualisation')
 
     def post(self):
-        file1 = self.request.files['file1'][0]
+        file1 = self.request.files['file'][0]
         original_fname = file1['filename']
         extension = os.path.splitext(original_fname)[1]
         output_file = open("uploads/"
@@ -164,14 +163,20 @@ class UploadHandler(tornado.web.RequestHandler):
         output_file.write(file1['body'])
         results = annotate_video("uploads/"
                                  + original_fname)
-        
-        self.render('vis_line.html', response = json.dumps(results))
+
+        self.render('vis_line.html', response=json.dumps(results))
         # self.write({'Response': True,
         #             'results': results})
 
 
+class VisuliseFileHandler(tornado.web.RequestHandler):
+
+    def get(self):
+        self.render('vis_file.html')
+
 app = tornado.web.Application([
-    (r'/upload', UploadHandler)
+    (r'/upload', UploadHandler),
+    (r'/visualise-file', VisuliseFileHandler)
 ], static_path='./static', debug=True)
 app.listen(8001)
 tornado.ioloop.IOLoop.instance().start()

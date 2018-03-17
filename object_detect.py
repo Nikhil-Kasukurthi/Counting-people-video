@@ -78,20 +78,24 @@ def load_image_into_numpy_array(image):
 with detection_graph.as_default():
     with tf.Session(graph=detection_graph) as sess:
 
-        cap = cv2.VideoCapture(opt.path)
+        # Reading from an image
+        frame = cv2.imread('./people.jpg')
+        use_image = True
+
+        # cap = cv2.VideoCapture(opt.path)
         # cap = cv2.VideoCapture(
         # 'The.Big.Sick.2017.720p.BluRay.H264.AAC-RARBG.mp4')
-        framerate = cap.get(cv2.CAP_PROP_FPS)
-        framecount = cap.get(cv2.CAP_PROP_FRAME_COUNT)
-        time_ = int(math.floor(framecount // framerate))
-        if time_ / 60 > 5:
-            jump = 30
-        elif time >= 60:
-            jump = 15
-        else:
-            jump = 5
-        # print(time_/60)
-        frames_extract = [i * framerate for i in range(0, time_, jump)]
+        # framerate = cap.get(cv2.CAP_PROP_FPS)
+        # framecount = cap.get(cv2.CAP_PROP_FRAME_COUNT)
+        # time_ = int(math.floor(framecount // framerate))
+        # if time_ / 60 > 5:
+        #     jump = 30
+        # elif time >= 60:
+        #     jump = 15
+        # else:
+        #     jump = 5
+        # # print(time_/60)
+        # frames_extract = [i * framerate for i in range(0, time_, jump)]
 
         # print(len(frames_extract))
 
@@ -104,12 +108,27 @@ with detection_graph.as_default():
             'detection_classes:0')
         num_detections = detection_graph.get_tensor_by_name('num_detections:0')
 
+        if use_image:
+	        image_np_expanded = np.expand_dims(frame, axis=0)
+	        (boxes, scores, classes, num) = sess.run(
+			    [detection_boxes, detection_scores,
+			     detection_classes, num_detections],
+			    feed_dict={image_tensor: image_np_expanded})
+	        vis_util.visualize_boxes_and_labels_on_image_array(
+                frame,
+                np.squeeze(boxes),
+                np.squeeze(classes).astype(np.int32),
+                np.squeeze(scores),
+                category_index,
+                use_normalized_coordinates=True,
+                line_thickness=8)
+	        cv2.imshow('frame', frame)
+	        cv2.imwrite('people_annotated.jpg',frame)
+
         annotations = {}
-        annotations['video_id'] = 240
         annotations['frames'] = []
         annotations['videoShape'] = {}
-        annotations['videoShape']['height'] = cap.get(
-            cv2.CAP_PROP_FRAME_HEIGHT)
+        annotations['videoShape']['height'] = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
         annotations['videoShape']['width'] = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
 
         for frame_number in frames_extract:
@@ -119,7 +138,7 @@ with detection_graph.as_default():
                 image_np_expanded = np.expand_dims(frame, axis=0)
                 annotations_frame = {}
                 annotations_frame['time'] = int(
-                    math.floor(framecount // framerate))
+                    math.floor(frame_number//framerate))
                 (boxes, scores, classes, num) = sess.run(
                     [detection_boxes, detection_scores,
                      detection_classes, num_detections],
