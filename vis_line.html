@@ -46,7 +46,7 @@ path.area {
     /* Add shadows to create the "card" effect */
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
-    height: 75vh;
+    /*height: 75vh;*/
     width: 100%;
     background-color: white;
 }
@@ -188,46 +188,42 @@ svg.append("clipPath")
 
 </script>
 <style type="text/css">
-  #custom-seekbar
+#custom-seekbar
 {  
   cursor: pointer;
   height: 10px;
-  margin-left: 40px;
   margin-bottom: 10px;
+  margin-left: 40px;
   margin-right: 40px;
-  outline: thin solid orange;
+  outline: thin solid #69C4E4;
   overflow: hidden;
   position: relative;
+  /*width: 100%;*/
 }
 #custom-seekbar span
 {
-  background-color: orange;
+  background-color: #69C4E4;
   position: absolute;
   top: 0;
   left: 0;
   height: 10px;
   width: 0px;
 }
-
-
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-<div id="custom-seekbar" align="center">
+<div id="custom-seekbar">
   <span></span>
 </div>
-
-<video id= width="400" controls muted>
-    <source src = {{ file_path }} type="video/mp4">
+<video id="video" width="400" controls muted style="align-self: center">
+    <source src= {{file_path}} type="video/mp4">
 </video>
 
 <script type="text/javascript">
+var vid = document.getElementById("video");
 var margin = {top: 40, right: 40, bottom: 40, left: 40},
     width = 1100 - margin.left - margin.right,
     height = 300 - margin.top - margin.bottom;
-
-document.getElementById("custom-seekbar").width = width;
-
-var vid = document.getElementById("video");
+document.getElementById("custom-seekbar").style.width = width;
 vid.ontimeupdate = function(){
   var percentage = ( vid.currentTime / vid.duration ) * 100;
   $("#custom-seekbar span").css("width", percentage+"%");
@@ -236,10 +232,10 @@ vid.ontimeupdate = function(){
 $("#custom-seekbar").on("click", function(e){
     var offset = $(this).offset();
     var left = (e.pageX - offset.left);
-    var totalWidth = width;
+    var totalWidth = $("#custom-seekbar").width();
     var percentage = ( left / totalWidth );
     var vidTime = vid.duration * percentage;
     vid.currentTime = vidTime;
-});
+});//click()
 </script>
 </div>
