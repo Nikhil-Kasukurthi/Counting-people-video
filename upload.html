@@ -2,11 +2,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel="stylesheet" href="css/responsive.css">
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+
+<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Roboto:100,300'>
+
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Roboto:100,300'>
-<link rel="stylesheet" href="static/css/style.css">
-<link rel="stylesheet" href="static/css/responsive.css">
+
+    <link rel="stylesheet" href="css/style.css">
 <style>
 
 svg {
@@ -50,18 +58,20 @@ path.area {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     height: 75vh;
-    width: 100%;
+    width: 500px;
     background-color: white;
 }
 
 /* On mouse-over, add a deeper shadow */
 .card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+
 }
 
 /* Add some padding inside the card container */
 .container {
     padding: 70px 40px;
+
 }
 #slide-up {
   animation: 1s slide-up;
@@ -160,7 +170,9 @@ path.area {
   opacity: 1;
   right: 0;
 }
-
+form{
+  padding-bottom: 20px;
+}
 </style>
 <body>
 <div class="row">
@@ -176,41 +188,39 @@ path.area {
     <span class="load">load</span>
    </p>
   </header>
-  
-   <form method="POST" action="/upload" enctype="multipart/form-data" onsubmit="return checkForm(this);">
+      <form method="POST" action="/upload" enctype="multipart/form-data" onsubmit="return checkForm(this);">
   <div class="body" id="drop">
    <i class="fa fa-file-text-o pointer-none" aria-hidden="true"></i>
    <p class="pointer-none"><b>Drag and drop</b> files here <br /> or <a href="" id="triggerFile">browse</a> to begin the upload</p>
-      <input type="file" multiple="multiple" name="file">
+      <input type="file" multiple="multiple" />
       </div>
       <center>
 
 <table>
 <tr>
 <td><label>Date:</label></td> 
-<td><input type="text" size="12" required pattern="\d{1,2}/\d{1,2}/\d{4}" placeholder="dd/mm/yyyy" name="date"></td>
+<td><input type="text" size="12" required pattern="\d{1,2}/\d{1,2}/\d{4}" placeholder="dd/mm/yyyy" name="startdate"></td>
 </tr>
 <br><br>
 <tr>
 <td><label>Start Time: </label></td>
-<td><input type="text" size="12" required pattern="\d{1,2}:\d{2}([ap]m)?" name="start_time"></td>
+<td><input type="text" size="12" required pattern="\d{1,2}:\d{2}([ap]m)?" name="starttime"></td>
 </tr>
 <br><br>
 <tr>
 <td><label>End Time: </label></td>
-<td><input type="text" size="12" required pattern="\d{1,2}:\d{2}([ap]m)?" name="end_time"></td>
+<td><input type="text" size="12" required pattern="\d{1,2}:\d{2}([ap]m)?" name="endtime"></td>
 </tr>
 <br><br>
 <tr>
 <td><label>Room Name: </label></td>
-<td><input type="text" size="12" name="room_name"></td>
+<td><input type="text" size="12" name="room"></td>
 </tr>
 </table>
 <br>
 <p><input type="submit" id="sub"></p>
 
 </form></center>
-
 <script type="text/javascript">
 function checkForm(form)
   {
@@ -310,7 +320,12 @@ if(form.room.value == '')
     alert("Enter the name of the room");
     return false;
 }
-}
+
+    alert("All input fields have been validated!");
+    return true;
+  }
+
+
 </script>
 
 
@@ -330,7 +345,8 @@ if(form.room.value == '')
  </div> 
   </div>
 
-    
+    <script  src="js/index.js"></script>
+
 <div class="column" id="slide-up">
 
 <div class="container">
@@ -348,5 +364,4 @@ if(form.room.value == '')
 </div>
 </div>
 </body>
-<script  src="static/js/index.js"></script>
 </html>
