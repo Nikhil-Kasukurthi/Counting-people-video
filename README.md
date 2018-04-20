@@ -1,7 +1,3 @@
-# Team Iris
-This is under the Museum Analytics module for the [Coding Culture Hackathon](https://coding-culture.zkm.de/). 
-
-#### [Round 1 Submission](https://github.com/Nikhil-Kasukurthi/Counting-people-video/raw/master/Museum%20Analytics.pdf)
 # Counting-people-video
 From the CCTV footage in each room, we get the number of people currently standing in there and generate insights about the inflow of visitors throughout the day. This way you could concentrate on the areas where visitors are not going. 
 
